@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OffRadar — playlist partagée</title>
+  <meta property="og:title" content="Une playlist de découverte à écouter" />
+  <meta property="og:description" content="Playlist générée avec OffRadar. Ouvre-la et enregistre-la dans ton Spotify." />
+  <style>
+    :root {
+      --bg:#0c0c0e; --card:#161618; --border:#2a2a2e; --fg:#ededef; --muted:#9a9aa2;
+      --primary:#1ed760; --primary-hover:#1fdf64; --primary-fg:#00120a; --radius:14px;
+    }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif;
+      background:radial-gradient(900px 500px at 50% -10%, #15241b 0%, var(--bg) 60%); color:var(--fg);
+      line-height:1.5; min-height:100vh; display:flex; justify-content:center; padding:40px 16px; }
+    .wrap { width:100%; max-width:560px; }
+    .entete { display:flex; align-items:center; gap:12px; margin-bottom:6px; }
+    .entete svg { width:34px; height:34px; color:var(--primary); }
+    h1 { font-size:22px; font-weight:800; margin:0; letter-spacing:-0.02em; }
+    .tagline { color:var(--muted); margin:0 0 26px; font-size:15px; }
+    .card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:18px; margin-bottom:18px; }
+    iframe { border:0; border-radius:12px; width:100%; height:480px; display:block; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; border:none; border-radius:9999px;
+      padding:13px 24px; font-size:15px; font-weight:700; cursor:pointer; text-decoration:none; font-family:inherit; transition:transform .1s,background .15s; }
+    .btn-primary { background:var(--primary); color:var(--primary-fg); }
+    .btn-primary:hover { background:var(--primary-hover); transform:scale(1.03); }
+    .btn-ghost { background:transparent; color:var(--fg); border:1px solid var(--border); }
+    .btn-ghost:hover { background:#1d1d20; }
+    .btn-bloc { width:100%; }
+    .promo { text-align:center; }
+    .promo h2 { font-size:17px; margin:0 0 6px; }
+    .promo p { color:var(--muted); font-size:14px; margin:0 0 16px; }
+    .teaser { margin-top:14px; font-size:13px; color:var(--muted); }
+    .teaser b { color:var(--fg); }
+    footer { text-align:center; color:var(--muted); font-size:12px; margin-top:24px; }
+    .lang { position:fixed; top:14px; right:16px; display:flex; gap:4px; }
+    .lang button { background:transparent; border:1px solid var(--border); color:var(--muted); border-radius:8px;
+      padding:4px 9px; font-size:12px; font-weight:700; cursor:pointer; }
+    .lang button.actif { background:#1d1d20; color:var(--fg); border-color:var(--fg); }
+    .vide { color:var(--muted); text-align:center; padding:30px 0; }
+  </style>
+</head>
+<body>
+  <div class="lang">
+    <button id="l-fr" data-l="fr">FR</button>
+    <button id="l-en" data-l="en">EN</button>
+  </div>
+  <div class="wrap">
+    <div class="entete">
+      <svg viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM72,128a8,8,0,0,1-16,0,72.08,72.08,0,0,1,72-72,8,8,0,0,1,0,16A56.06,56.06,0,0,0,72,128Zm32,0a24,24,0,1,1,24,24A24,24,0,0,1,104,128Zm24,72a8,8,0,0,1,0-16,56.06,56.06,0,0,0,56-56,8,8,0,0,1,16,0A72.08,72.08,0,0,1,128,200Z"/></svg>
+      <h1 id="marque">OffRadar</h1>
+    </div>
+    <p class="tagline" id="tagline"></p>
+
+    <div class="card" id="carte-playlist"></div>
+
+    <div class="card promo">
+      <h2 id="promo-titre"></h2>
+      <p id="promo-texte"></p>
+      <a class="btn btn-primary btn-bloc" id="btn-dl" href="./offradar-extension.zip" download></a>
+      <div class="teaser" id="teaser"></div>
+    </div>
+
+    <footer id="footer"></footer>
+  </div>
+
+  <script>
+    // Nom de marque (centralisé). « Spotify » est volontairement absent : interdit dans le nom d'un produit tiers.
+    const MARQUE = 'OffRadar';
+
+    const T = {
+      fr: {
+        tagline: 'Une playlist de découverte, rien que pour toi.',
+        ouvrir: 'Ouvrir dans Spotify',
+        vide: 'Lien de playlist manquant. Demande à la personne de te renvoyer le lien.',
+        promoTitre: 'Crée tes propres playlists de découverte',
+        promoTexte: 'Cette playlist a été générée avec ' + MARQUE + ', une extension qui crée des playlists de découverte à partir de ton écoute Spotify (artistes nouveaux et pointus, jamais les mêmes).',
+        dl: 'Télécharger l’extension',
+        teaser: '🚀 <b>Bientôt sur le Chrome Web Store et Firefox</b> — pour une installation en un clic.',
+        footer: 'Non affilié à Spotify. « Spotify » est une marque de Spotify AB.',
+      },
+      en: {
+        tagline: 'A discovery playlist, just for you.',
+        ouvrir: 'Open in Spotify',
+        vide: 'Missing playlist link. Ask the sender to resend the link.',
+        promoTitre: 'Create your own discovery playlists',
+        promoTexte: 'This playlist was generated with ' + MARQUE + ', an extension that builds discovery playlists from your Spotify listening (fresh, under-the-radar artists, never the same).',
+        dl: 'Download the extension',
+        teaser: '🚀 <b>Coming soon to the Chrome Web Store and Firefox</b> — for one-click install.',
+        footer: 'Not affiliated with Spotify. “Spotify” is a trademark of Spotify AB.',
+      },
+    };
+
+    let lang = (localStorage.getItem('lang_partage')) || ((navigator.language || '').toLowerCase().startsWith('fr') ? 'fr' : 'en');
+    const params = new URLSearchParams(location.search);
+    const pid = (params.get('p') || '').replace(/[^a-zA-Z0-9]/g, ''); // id de playlist Spotify
+
+    function rendre() {
+      const t = T[lang];
+      document.documentElement.lang = lang;
+      document.getElementById('marque').textContent = MARQUE;
+      document.getElementById('tagline').textContent = t.tagline;
+      document.getElementById('promo-titre').textContent = t.promoTitre;
+      document.getElementById('promo-texte').textContent = t.promoTexte;
+      document.getElementById('btn-dl').textContent = t.dl;
+      document.getElementById('teaser').innerHTML = t.teaser;
+      document.getElementById('footer').textContent = t.footer;
+      document.getElementById('l-fr').classList.toggle('actif', lang === 'fr');
+      document.getElementById('l-en').classList.toggle('actif', lang === 'en');
+
+      const carte = document.getElementById('carte-playlist');
+      if (pid) {
+        carte.innerHTML =
+          '<iframe loading="lazy" allow="encrypted-media" src="https://open.spotify.com/embed/playlist/' + pid + '?theme=0"></iframe>' +
+          '<a class="btn btn-ghost btn-bloc" style="margin-top:14px" target="_blank" rel="noopener" href="https://open.spotify.com/playlist/' + pid + '">' + t.ouvrir + '</a>';
+      } else {
+        carte.innerHTML = '<div class="vide">' + t.vide + '</div>';
+      }
+    }
+
+    document.getElementById('l-fr').addEventListener('click', () => { lang = 'fr'; localStorage.setItem('lang_partage', 'fr'); rendre(); });
+    document.getElementById('l-en').addEventListener('click', () => { lang = 'en'; localStorage.setItem('lang_partage', 'en'); rendre(); });
+    rendre();
+  </script>
+</body>
+</html>
