@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OffRadar — Politique de confidentialité</title>
+  <meta name="robots" content="index,follow" />
+  <style>
+    :root {
+      --bg:#0c0c0e; --card:#161618; --border:#2a2a2e; --fg:#ededef; --muted:#9a9aa2;
+      --primary:#1ed760; --radius:14px;
+    }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif;
+      background:radial-gradient(900px 500px at 50% -10%, #15241b 0%, var(--bg) 60%); color:var(--fg);
+      line-height:1.6; min-height:100vh; display:flex; justify-content:center; padding:40px 16px; }
+    .wrap { width:100%; max-width:680px; }
+    .entete { display:flex; align-items:center; gap:12px; margin-bottom:4px; }
+    .entete svg { width:30px; height:30px; color:var(--primary); }
+    h1 { font-size:24px; font-weight:800; margin:0; letter-spacing:-0.02em; }
+    h2 { font-size:17px; font-weight:700; margin:28px 0 8px; }
+    p, li { color:var(--fg); font-size:15px; margin:8px 0; }
+    .maj { color:var(--muted); font-size:13px; margin:2px 0 20px; }
+    .card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:22px 24px; }
+    a { color:var(--primary); }
+    code { background:#0a0a0c; border:1px solid var(--border); border-radius:6px; padding:1px 6px; font-size:13px; }
+    .pill { display:inline-block; background:#10231a; border:1px solid #1c3b2a; color:#7ee2a8; border-radius:9999px; padding:3px 10px; font-size:12px; font-weight:700; margin-bottom:8px; }
+    footer { text-align:center; color:var(--muted); font-size:12px; margin-top:22px; }
+    .lang { position:fixed; top:14px; right:16px; display:flex; gap:4px; }
+    .lang button { background:transparent; border:1px solid var(--border); color:var(--muted); border-radius:8px;
+      padding:4px 9px; font-size:12px; font-weight:700; cursor:pointer; }
+    .lang button.actif { background:#1d1d20; color:var(--fg); border-color:var(--fg); }
+    [data-fr], [data-en] { display:none; }
+    html[lang="fr"] [data-fr] { display:revert; }
+    html[lang="en"] [data-en] { display:revert; }
+  </style>
+</head>
+<body>
+  <div class="lang">
+    <button id="l-fr" data-l="fr">FR</button>
+    <button id="l-en" data-l="en">EN</button>
+  </div>
+  <div class="wrap">
+    <div class="entete">
+      <svg viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM72,128a8,8,0,0,1-16,0,72.08,72.08,0,0,1,72-72,8,8,0,0,1,0,16A56.06,56.06,0,0,0,72,128Zm32,0a24,24,0,1,1,24,24A24,24,0,0,1,104,128Zm24,72a8,8,0,0,1,0-16,56.06,56.06,0,0,0,56-56,8,8,0,0,1,16,0A72.08,72.08,0,0,1,128,200Z"/></svg>
+      <h1>OffRadar</h1>
+    </div>
+
+    <!-- ============================== FR ============================== -->
+    <div data-fr>
+      <p class="maj">Politique de confidentialité — dernière mise à jour : 23 juin 2026</p>
+      <div class="card">
+        <span class="pill">Aucun serveur · aucune collecte centralisée</span>
+        <p>OffRadar est une extension de navigateur qui génère des playlists Spotify de découverte. <strong>Nous n'exploitons aucun serveur</strong> et nous ne collectons, ne stockons ni ne vendons aucune donnée personnelle de notre côté. Tout fonctionne directement dans votre navigateur.</p>
+
+        <h2>1. Données traitées et où elles restent</h2>
+        <p>Pour fonctionner, l'extension stocke des informations <strong>localement dans votre navigateur</strong> (via <code>chrome.storage.local</code>), sur votre seul appareil :</p>
+        <ul>
+          <li>vos <strong>jetons d'accès Spotify</strong> (obtenus par connexion OAuth, pour lire vos goûts et créer des playlists) ;</li>
+          <li>votre <strong>Spotify Client ID</strong> (que vous saisissez à la configuration) ;</li>
+          <li>l'<strong>historique des playlists générées</strong> et la langue choisie.</li>
+        </ul>
+        <p>Ces données <strong>ne quittent jamais votre appareil</strong> et ne nous sont jamais transmises.</p>
+
+        <h2>2. Services tiers contactés</h2>
+        <p>L'extension communique directement, depuis votre navigateur, avec :</p>
+        <ul>
+          <li><strong>Spotify</strong> — pour vous connecter, lire vos artistes/titres les plus écoutés et vos écoutes récentes, et créer/mettre à jour vos playlists. Soumis à la <a href="https://www.spotify.com/legal/privacy-policy/" target="_blank" rel="noopener">politique de confidentialité de Spotify</a>.</li>
+          <li><strong>Last.fm</strong> — pour la découverte d'artistes similaires. Seuls des <strong>noms d'artistes</strong> (déduits de votre écoute) sont envoyés. Soumis à la <a href="https://www.last.fm/legal/privacy" target="_blank" rel="noopener">politique de confidentialité de Last.fm</a>.</li>
+        </ul>
+
+        <h2>3. Page de partage</h2>
+        <p>Quand vous partagez une playlist, une page sur <code>getoffradar.com</code> affiche le lecteur Spotify intégré de cette playlist. Cette page est <strong>statique</strong> (hébergée sur GitHub Pages) ; l'ouverture du lecteur peut amener Spotify à déposer ses propres cookies, selon sa politique. Nous n'y plaçons aucun traceur.</p>
+
+        <h2>4. Pas de publicité, pas de traceurs</h2>
+        <p>OffRadar ne contient <strong>aucune publicité</strong>, <strong>aucun outil d'analyse</strong> tiers et ne revend aucune donnée.</p>
+
+        <h2>5. Supprimer vos données</h2>
+        <ul>
+          <li>Utilisez le bouton <strong>« Se déconnecter »</strong> de l'extension pour effacer les données locales du compte ;</li>
+          <li><strong>Désinstaller</strong> l'extension supprime l'ensemble des données locales ;</li>
+          <li>Vous pouvez révoquer l'accès de l'application depuis vos <a href="https://www.spotify.com/account/apps/" target="_blank" rel="noopener">paramètres de compte Spotify</a>.</li>
+        </ul>
+
+        <h2>6. Contact</h2>
+        <p>Pour toute question : <a href="mailto:hello@getoffradar.com">hello@getoffradar.com</a>.</p>
+      </div>
+      <footer>Non affilié à Spotify. « Spotify » est une marque de Spotify AB.</footer>
+    </div>
+
+    <!-- ============================== EN ============================== -->
+    <div data-en>
+      <p class="maj">Privacy Policy — last updated: June 23, 2026</p>
+      <div class="card">
+        <span class="pill">No server · no central data collection</span>
+        <p>OffRadar is a browser extension that builds Spotify discovery playlists. <strong>We run no server</strong> and we do not collect, store, or sell any of your personal data on our side. Everything runs directly in your browser.</p>
+
+        <h2>1. Data processed and where it stays</h2>
+        <p>To work, the extension stores information <strong>locally in your browser</strong> (via <code>chrome.storage.local</code>), on your device only:</p>
+        <ul>
+          <li>your <strong>Spotify access tokens</strong> (obtained via OAuth sign-in, to read your taste and create playlists);</li>
+          <li>your <strong>Spotify Client ID</strong> (which you enter during setup);</li>
+          <li>your <strong>history of generated playlists</strong> and chosen language.</li>
+        </ul>
+        <p>This data <strong>never leaves your device</strong> and is never sent to us.</p>
+
+        <h2>2. Third-party services contacted</h2>
+        <p>The extension communicates directly, from your browser, with:</p>
+        <ul>
+          <li><strong>Spotify</strong> — to sign you in, read your top artists/tracks and recently played, and create/update your playlists. Subject to <a href="https://www.spotify.com/legal/privacy-policy/" target="_blank" rel="noopener">Spotify's Privacy Policy</a>.</li>
+          <li><strong>Last.fm</strong> — for similar-artist discovery. Only <strong>artist names</strong> (derived from your listening) are sent. Subject to <a href="https://www.last.fm/legal/privacy" target="_blank" rel="noopener">Last.fm's Privacy Policy</a>.</li>
+        </ul>
+
+        <h2>3. Share page</h2>
+        <p>When you share a playlist, a page on <code>getoffradar.com</code> shows that playlist's embedded Spotify player. This page is <strong>static</strong> (hosted on GitHub Pages); opening the player may let Spotify set its own cookies, per its policy. We place no trackers on it.</p>
+
+        <h2>4. No ads, no trackers</h2>
+        <p>OffRadar contains <strong>no advertising</strong>, <strong>no third-party analytics</strong>, and sells no data.</p>
+
+        <h2>5. Deleting your data</h2>
+        <ul>
+          <li>Use the extension's <strong>"Sign out"</strong> button to clear the account's local data;</li>
+          <li><strong>Uninstalling</strong> the extension removes all local data;</li>
+          <li>You can revoke the app's access from your <a href="https://www.spotify.com/account/apps/" target="_blank" rel="noopener">Spotify account settings</a>.</li>
+        </ul>
+
+        <h2>6. Contact</h2>
+        <p>For any question: <a href="mailto:hello@getoffradar.com">hello@getoffradar.com</a>.</p>
+      </div>
+      <footer>Not affiliated with Spotify. "Spotify" is a trademark of Spotify AB.</footer>
+    </div>
+  </div>
+
+  <script>
+    function setLang(l) {
+      document.documentElement.lang = l;
+      localStorage.setItem('lang_partage', l);
+      document.getElementById('l-fr').classList.toggle('actif', l === 'fr');
+      document.getElementById('l-en').classList.toggle('actif', l === 'en');
+    }
+    const init = localStorage.getItem('lang_partage') || ((navigator.language || '').toLowerCase().startsWith('fr') ? 'fr' : 'en');
+    document.getElementById('l-fr').addEventListener('click', () => setLang('fr'));
+    document.getElementById('l-en').addEventListener('click', () => setLang('en'));
+    setLang(init);
+  </script>
+</body>
+</html>
