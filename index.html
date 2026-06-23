@@ -60,7 +60,7 @@
     .step h3 { font-size:16px; margin:0 0 5px; }
     .step p { color:var(--muted); font-size:14px; margin:0; }
 
-    .features { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .features { display:grid; grid-template-columns:repeat(auto-fit, minmax(210px,1fr)); gap:14px; }
     .feat { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:20px; }
     .feat .ic { color:var(--primary); margin-bottom:11px; display:block; line-height:1; }
     .feat .ic i { font-size:30px; }
@@ -157,6 +157,7 @@
         <div class="feat"><span class="ic"><i class="ph ph-binoculars"></i></span><h3 id="f1-t"></h3><p id="f1-p"></p></div>
         <div class="feat"><span class="ic"><i class="ph ph-sliders-horizontal"></i></span><h3 id="f2-t"></h3><p id="f2-p"></p></div>
         <div class="feat"><span class="ic"><i class="ph ph-shield-check"></i></span><h3 id="f3-t"></h3><p id="f3-p"></p></div>
+        <div class="feat"><span class="ic"><i class="ph ph-share-network"></i></span><h3 id="f4-t"></h3><p id="f4-p"></p></div>
       </div>
 
       <div class="section-titre" id="t-faq"></div>
@@ -208,6 +209,7 @@
         f1t: 'Vraie découverte', f1p: 'Un seul titre par artiste, anti-répétition sur tes dernières playlists.',
         f2t: 'Sur-mesure', f2p: 'Taille, ambiance, décennie, exclusion de l’explicite, familiarité.',
         f3t: '100 % privé', f3p: 'Aucun serveur, aucune collecte. Tout reste dans ton navigateur.',
+        f4t: 'Partage en 2 clics', f4p: 'Fais découvrir tes pépites, aucune installation requise.',
         tFaq: 'Questions fréquentes',
         faq: [
           { q: 'Pourquoi proposer une extension plutôt qu’un site ?',
@@ -250,6 +252,7 @@
         f1t: 'Real discovery', f1p: 'One track per artist, anti-repeat across your recent playlists.',
         f2t: 'Made to measure', f2p: 'Size, mood, decade, explicit filter, familiarity.',
         f3t: '100% private', f3p: 'No server, no data collection. Everything stays in your browser.',
+        f4t: 'Share in 2 clicks', f4p: 'Share your gems — no install needed.',
         tFaq: 'Frequently asked questions',
         faq: [
           { q: 'Why an extension rather than a website?',
@@ -319,6 +322,7 @@
         txt('f1-t', t.f1t); txt('f1-p', t.f1p);
         txt('f2-t', t.f2t); txt('f2-p', t.f2p);
         txt('f3-t', t.f3t); txt('f3-p', t.f3p);
+        txt('f4-t', t.f4t); txt('f4-p', t.f4p);
         txt('t-faq', t.tFaq);
         $('faq-list').innerHTML = t.faq.map(function (item) {
           return '<details><summary>' + item.q + '</summary><p class="ans">' + item.a + '</p></details>';
