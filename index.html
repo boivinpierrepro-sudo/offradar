@@ -47,6 +47,7 @@
     .hero h2 { font-size:42px; line-height:1.07; font-weight:850; letter-spacing:-0.03em; margin:0 auto 16px; max-width:16ch; }
     .hero p.sub { color:var(--muted); font-size:17px; max-width:52ch; margin:0 auto 24px; }
     .cta-row { display:flex; flex-direction:column; align-items:center; gap:14px; }
+    .dl-buttons { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
     .req { display:inline-flex; align-items:flex-start; gap:9px; text-align:left; background:#16140c; border:1px solid #3a3115;
       color:#e7d9a8; border-radius:12px; padding:11px 15px; font-size:13.5px; max-width:46ch; line-height:1.45; }
     .req i { color:#f0c453; font-size:18px; margin-top:1px; flex-shrink:0; }
@@ -143,7 +144,10 @@
         <p class="sub" id="h-sub"></p>
         <div class="cta-row">
           <div class="req"><i class="ph ph-crown-simple"></i><span id="h-req"></span></div>
-          <a class="btn btn-primary" id="h-dl" href="./offradar-extension.zip" download></a>
+          <div class="dl-buttons">
+            <a class="btn btn-primary" id="h-dl" href="./offradar-extension.zip" download></a>
+            <a class="btn btn-ghost" id="h-dl-ff" href="./offradar.xpi"></a>
+          </div>
           <div class="cta-note" id="h-note"></div>
         </div>
       </section>
@@ -169,7 +173,10 @@
       <div class="band">
         <h3 id="band-titre"></h3>
         <div class="cta-row">
-          <a class="btn btn-primary" id="band-dl" href="./offradar-extension.zip" download></a>
+          <div class="dl-buttons">
+            <a class="btn btn-primary" id="band-dl" href="./offradar-extension.zip" download></a>
+            <a class="btn btn-ghost" id="band-dl-ff" href="./offradar.xpi"></a>
+          </div>
           <div class="cta-note" id="band-note"></div>
         </div>
       </div>
@@ -191,6 +198,8 @@
         footDisc: 'Non affilié à Spotify. « Spotify » est une marque de Spotify AB.',
         footPrivacy: 'Confidentialité',
         dl: 'Télécharger l’extension',
+        dlChrome: 'Télécharger pour Chrome',
+        dlFirefox: 'Télécharger pour Firefox',
         // partage
         sTagline: 'Une playlist de découverte, rien que pour toi.',
         ouvrir: 'Ouvrir dans Spotify',
@@ -236,6 +245,8 @@
         footDisc: 'Not affiliated with Spotify. “Spotify” is a trademark of Spotify AB.',
         footPrivacy: 'Privacy',
         dl: 'Download the extension',
+        dlChrome: 'Download for Chrome',
+        dlFirefox: 'Download for Firefox',
         sTagline: 'A discovery playlist, just for you.',
         ouvrir: 'Open in Spotify',
         vide: 'Missing playlist link. Ask the sender to resend the link.',
@@ -316,7 +327,7 @@
         txt('h-titre', t.heroTitre);
         txt('h-sub', t.heroSub);
         html('h-req', t.req);
-        txt('h-dl', t.dl); html('h-note', t.ctaNote);
+        txt('h-dl', t.dlChrome); txt('h-dl-ff', t.dlFirefox); html('h-note', t.ctaNote);
         txt('t-steps', t.tSteps);
         txt('st1-t', t.st1t); txt('st1-p', t.st1p);
         txt('st2-t', t.st2t); txt('st2-p', t.st2p);
@@ -331,7 +342,7 @@
           return '<details><summary>' + item.q + '</summary><p class="ans">' + item.a + '</p></details>';
         }).join('');
         txt('band-titre', t.bandTitre);
-        txt('band-dl', t.dl); html('band-note', t.ctaNote);
+        txt('band-dl', t.dlChrome); txt('band-dl-ff', t.dlFirefox); html('band-note', t.ctaNote);
       }
     }
 
