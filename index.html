@@ -64,7 +64,7 @@
     .step h3 { font-size:16px; margin:0 0 5px; }
     .step p { color:var(--muted); font-size:14px; margin:0; }
 
-    .features { display:grid; grid-template-columns:repeat(auto-fit, minmax(210px,1fr)); gap:14px; }
+    .features { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
     .feat { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:20px; }
     .feat .ic { color:var(--primary); margin-bottom:11px; display:block; line-height:1; }
     .feat .ic i { font-size:30px; }
@@ -163,6 +163,8 @@
       <div class="features">
         <div class="feat"><span class="ic"><i class="ph ph-binoculars"></i></span><h3 id="f1-t"></h3><p id="f1-p"></p></div>
         <div class="feat"><span class="ic"><i class="ph ph-sliders-horizontal"></i></span><h3 id="f2-t"></h3><p id="f2-p"></p></div>
+        <div class="feat"><span class="ic"><i class="ph ph-note-pencil"></i></span><h3 id="f5-t"></h3><p id="f5-p"></p></div>
+        <div class="feat"><span class="ic"><i class="ph ph-star"></i></span><h3 id="f6-t"></h3><p id="f6-p"></p></div>
         <div class="feat"><span class="ic"><i class="ph ph-shield-check"></i></span><h3 id="f3-t"></h3><p id="f3-p"></p></div>
         <div class="feat"><span class="ic"><i class="ph ph-share-network"></i></span><h3 id="f4-t"></h3><p id="f4-p"></p></div>
       </div>
@@ -209,7 +211,7 @@
         sPromoTexte: 'Cette playlist a été générée avec ' + MARQUE + ', une extension qui crée des playlists de découverte à partir de ton écoute Spotify.',
         sTeaser: '🚀 <b>Disponible pour Chrome et Firefox</b>, installation en un clic.',
         // landing
-        eyebrow: 'Extension Chrome · Gratuite',
+        eyebrow: 'Chrome & Firefox · Gratuite',
         heroTitre: 'De vraies découvertes musicales, pas du réchauffé',
         heroSub: 'OffRadar part de ton historique d’écoute Spotify pour dénicher tes prochains artistes préférés, et génère une playlist unique à chaque fois.',
         req: 'À savoir avant d’installer : OffRadar nécessite un <b>compte Spotify Premium</b> et un <b>compte Spotify Developer</b> (gratuit, créé en 2 min, on te guide).',
@@ -217,10 +219,12 @@
         tSteps: 'Comment ça marche',
         st1t: 'Connecte ton Spotify', st1p: 'Connexion sécurisée en quelques clics. Rien n’est stocké chez nous. L’extension requiert un compte Spotify Developer (gratuit).',
         st2t: 'Définis tes règles', st2p: 'Ambiance, époque, notoriété, styles, dose de familiarité…',
-        st3t: 'Reçois ta playlist', st3p: 'Directement dans ta bibliothèque Spotify, prête à écouter.',
+        st3t: 'Reçois ta playlist', st3p: 'Directement dans ta bibliothèque Spotify, prête à écouter. Renomme-la, change sa pochette ou mets-la en favori en un clic.',
         tFeat: 'Ce qui fait la différence',
         f1t: 'Vraie découverte', f1p: 'Un seul titre par artiste, anti-répétition sur tes dernières playlists.',
         f2t: 'Sur-mesure', f2p: 'Taille, ambiance, décennie, exclusion de l’explicite, familiarité.',
+        f5t: 'Gère tes playlists', f5p: 'Renomme-les et pose ta propre pochette, directement depuis OffRadar.',
+        f6t: 'Favoris & historique', f6p: 'Tes 10 dernières playlists à portée de main, tes préférées conservées en favori.',
         f3t: '100 % privé', f3p: 'Aucun serveur, aucune collecte. Tout reste dans ton navigateur.',
         f4t: 'Partage en 2 clics', f4p: 'Fais découvrir tes pépites, aucune installation requise.',
         tFaq: 'Questions fréquentes',
@@ -231,6 +235,10 @@
             a: 'Spotify limite le nombre d’utilisateurs par application en mode développeur. Pour que tout le monde puisse utiliser OffRadar sans liste d’attente, chaque utilisateur crée sa propre petite application Spotify (gratuite et en 2 minutes) et y connecte OffRadar. C’est ce qui garde l’outil ouvert et indépendant.' },
           { q: 'Comment créer mon compte Spotify Developer ?',
             a: 'Va sur le <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener">Spotify Developer Dashboard</a>, connecte-toi, clique « Create app », coche « Web API », ajoute l’URL de redirection affichée par l’extension, puis copie ton « Client ID » dans OffRadar. L’extension te guide pas à pas au premier lancement.' },
+          { q: 'Comment conserver une playlist ?',
+            a: 'Chaque playlist générée est ajoutée à ta bibliothèque Spotify. Dans OffRadar, seules tes 10 dernières playlists restent dans l’historique : au-delà, les plus anciennes sont automatiquement retirées (d’OffRadar et de ta bibliothèque Spotify). Pour en garder une définitivement, mets-la en favori (l’étoile) : les favoris ne sont jamais supprimés automatiquement.' },
+          { q: 'Que se passe-t-il quand je supprime une playlist ?',
+            a: 'Le bouton « Supprimer » retire la playlist de ta bibliothèque Spotify ET de ton historique OffRadar. C’est définitif. Pour garder une playlist à l’abri, mets-la plutôt en favori que de compter sur l’historique.' },
           { q: 'J’ai des suggestions d’amélioration, comment vous les partager ?',
             a: 'Avec grand plaisir, écris-nous à <a href="mailto:hello@getoffradar.com">hello@getoffradar.com</a>. Chaque retour fait évoluer OffRadar.' },
           { q: 'J’ai choisi un style mais la playlist contient des morceaux hors sujet, pourquoi ?',
@@ -238,7 +246,7 @@
           { q: 'OffRadar est-il payant ?',
             a: 'Non, OffRadar est entièrement gratuit aujourd’hui. Il te faut seulement un compte Spotify Premium (requis par l’API Spotify) et un compte développeur Spotify gratuit.' },
           { q: 'Sur quels navigateurs ça fonctionne ?',
-            a: 'Chrome et les navigateurs basés sur Chromium (Edge, Brave, Opera). Une version Firefox est prévue.' },
+            a: 'Chrome et les navigateurs basés sur Chromium (Edge, Brave, Opera), ainsi que Firefox.' },
         ],
         bandTitre: 'Prêt à sortir des sentiers battus ?',
       },
@@ -254,7 +262,7 @@
         sPromoTitre: 'Create your own discovery playlists',
         sPromoTexte: 'This playlist was generated with ' + MARQUE + ', an extension that builds discovery playlists from your Spotify listening.',
         sTeaser: '🚀 <b>Available for Chrome and Firefox</b>, one-click install.',
-        eyebrow: 'Chrome extension · Free',
+        eyebrow: 'Chrome & Firefox · Free',
         heroTitre: 'Real musical discoveries, not reheated leftovers',
         heroSub: 'OffRadar starts from your Spotify listening history to dig out your next favorite artists, and builds a unique playlist every time.',
         req: 'Before you install: OffRadar requires a <b>Spotify Premium account</b> and a <b>Spotify Developer account</b> (free, set up in 2 min, we guide you).',
@@ -262,10 +270,12 @@
         tSteps: 'How it works',
         st1t: 'Connect your Spotify', st1p: 'Secure sign-in in a few clicks. Nothing is stored on our side. The extension requires a free Spotify Developer account.',
         st2t: 'Set your rules', st2p: 'Mood, era, popularity, styles, familiarity dial…',
-        st3t: 'Get your playlist', st3p: 'Right in your Spotify library, ready to play.',
+        st3t: 'Get your playlist', st3p: 'Right in your Spotify library, ready to play. Rename it, change its cover, or favorite it in one click.',
         tFeat: 'What makes it different',
         f1t: 'Real discovery', f1p: 'One track per artist, anti-repeat across your recent playlists.',
         f2t: 'Made to measure', f2p: 'Size, mood, decade, explicit filter, familiarity.',
+        f5t: 'Manage your playlists', f5p: 'Rename them and set your own cover, right from OffRadar.',
+        f6t: 'Favorites & history', f6p: 'Your last 10 playlists at hand, your favorites kept safe.',
         f3t: '100% private', f3p: 'No server, no data collection. Everything stays in your browser.',
         f4t: 'Share in 2 clicks', f4p: 'Share your gems, no install needed.',
         tFaq: 'Frequently asked questions',
@@ -276,6 +286,10 @@
             a: 'Spotify caps the number of users per app in developer mode. So that everyone can use OffRadar without a waitlist, each user creates their own small Spotify app (free, in 2 minutes) and connects OffRadar to it. That’s what keeps the tool open and independent.' },
           { q: 'How do I create my Spotify Developer account?',
             a: 'Go to the <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener">Spotify Developer Dashboard</a>, sign in, click “Create app”, tick “Web API”, add the redirect URL shown by the extension, then copy your “Client ID” into OffRadar. The extension walks you through it on first launch.' },
+          { q: 'How can I save a playlist?',
+            a: 'Every playlist you generate is added to your Spotify library. In OffRadar, only your last 10 playlists stay in History: beyond that, the oldest ones are automatically removed (from OffRadar and from your Spotify library). To keep one for good, mark it as a favorite (the star): favorites are never auto-deleted.' },
+          { q: 'What happens when I delete a playlist?',
+            a: 'The “Delete” button removes the playlist from your Spotify library AND from your OffRadar history. It’s permanent. To keep a playlist safe, mark it as a favorite instead of relying on History.' },
           { q: 'I have improvement ideas, how can I share them?',
             a: 'Gladly, email us at <a href="mailto:hello@getoffradar.com">hello@getoffradar.com</a>. Every bit of feedback shapes OffRadar.' },
           { q: 'I picked a style but the playlist has off-topic tracks. Why?',
@@ -283,7 +297,7 @@
           { q: 'Is OffRadar paid?',
             a: 'No, OffRadar is completely free today. You only need a Spotify Premium account (required by the Spotify API) and a free Spotify Developer account.' },
           { q: 'Which browsers does it work on?',
-            a: 'Chrome and Chromium-based browsers (Edge, Brave, Opera). A Firefox version is planned.' },
+            a: 'Chrome and Chromium-based browsers (Edge, Brave, Opera), plus Firefox.' },
         ],
         bandTitre: 'Ready to go off the beaten path?',
       },
@@ -336,6 +350,8 @@
         txt('t-feat', t.tFeat);
         txt('f1-t', t.f1t); txt('f1-p', t.f1p);
         txt('f2-t', t.f2t); txt('f2-p', t.f2p);
+        txt('f5-t', t.f5t); txt('f5-p', t.f5p);
+        txt('f6-t', t.f6t); txt('f6-p', t.f6p);
         txt('f3-t', t.f3t); txt('f3-p', t.f3p);
         txt('f4-t', t.f4t); txt('f4-p', t.f4p);
         txt('t-faq', t.tFaq);
