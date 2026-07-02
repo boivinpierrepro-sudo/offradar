@@ -189,6 +189,7 @@
       <div class="links">
         <a href="./privacy.html" id="foot-privacy"></a>
         <a href="mailto:hello@getoffradar.com">hello@getoffradar.com</a>
+        <a href="https://buymeacoffee.com/getoffradar" target="_blank" rel="noopener" id="foot-support"></a>
       </div>
       <div class="disclaimer" id="foot-disc"></div>
     </footer>
@@ -200,6 +201,7 @@
       fr: {
         footDisc: 'Non affilié à Spotify. « Spotify » est une marque de Spotify AB.',
         footPrivacy: 'Confidentialité',
+        footSupport: '☕ Soutenir',
         dl: 'Découvrir OffRadar',
         dlChrome: 'Installer sur Chrome',
         dlFirefox: 'Installer sur Firefox',
@@ -235,6 +237,10 @@
             a: 'Spotify limite le nombre d’utilisateurs par application en mode développeur. Pour que tout le monde puisse utiliser OffRadar sans liste d’attente, chaque utilisateur crée sa propre petite application Spotify (gratuite et en 2 minutes) et y connecte OffRadar. C’est ce qui garde l’outil ouvert et indépendant.' },
           { q: 'Comment créer mon compte Spotify Developer ?',
             a: 'Va sur le <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener">Spotify Developer Dashboard</a>, connecte-toi, clique « Create app », coche « Web API », ajoute l’URL de redirection affichée par l’extension, puis copie ton « Client ID » dans OffRadar. L’extension te guide pas à pas au premier lancement.' },
+          { q: 'Combien de comptes / d’appareils un compte développeur peut-il gérer ?',
+            a: 'Ton application Spotify Developer (en mode développement) peut autoriser jusqu’à 5 comptes Spotify — largement assez pour toi (et par exemple ta famille) ; chaque compte s’ajoute dans l’onglet « User Management » de ton app. Côté appareils, tu peux utiliser OffRadar sur autant de navigateurs et d’ordinateurs que tu veux : il suffit de refaire la petite configuration (coller ton Client ID) sur chacun. En revanche, ton historique de playlists reste propre à chaque navigateur (voir ci-dessous).' },
+          { q: 'Pourquoi mes playlists n’apparaissent-elles pas quand je me connecte sur un autre navigateur ?',
+            a: 'Parce qu’OffRadar est une extension qui fonctionne entièrement dans ton navigateur : tes réglages et l’historique des playlists générées sont enregistrés localement, sur cet appareil et ce navigateur uniquement. Rien n’est stocké en ligne — il n’y a pas de compte OffRadar — donc ces données ne se partagent pas d’un navigateur ou d’un appareil à l’autre. Tes playlists elles-mêmes restent bien sûr dans ta bibliothèque Spotify (accessible partout) ; seul l’historique OffRadar est local.' },
           { q: 'Comment conserver une playlist ?',
             a: 'Chaque playlist générée est ajoutée à ta bibliothèque Spotify. Dans OffRadar, seules tes 10 dernières playlists restent dans l’historique : au-delà, les plus anciennes sont automatiquement retirées (d’OffRadar et de ta bibliothèque Spotify). Pour en garder une définitivement, mets-la en favori (l’étoile) : les favoris ne sont jamais supprimés automatiquement.' },
           { q: 'Que se passe-t-il quand je supprime une playlist ?',
@@ -253,6 +259,7 @@
       en: {
         footDisc: 'Not affiliated with Spotify. “Spotify” is a trademark of Spotify AB.',
         footPrivacy: 'Privacy',
+        footSupport: '☕ Support',
         dl: 'Get OffRadar',
         dlChrome: 'Add to Chrome',
         dlFirefox: 'Add to Firefox',
@@ -286,6 +293,10 @@
             a: 'Spotify caps the number of users per app in developer mode. So that everyone can use OffRadar without a waitlist, each user creates their own small Spotify app (free, in 2 minutes) and connects OffRadar to it. That’s what keeps the tool open and independent.' },
           { q: 'How do I create my Spotify Developer account?',
             a: 'Go to the <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener">Spotify Developer Dashboard</a>, sign in, click “Create app”, tick “Web API”, add the redirect URL shown by the extension, then copy your “Client ID” into OffRadar. The extension walks you through it on first launch.' },
+          { q: 'How many accounts / devices can a single developer account support?',
+            a: 'Your Spotify Developer app (in development mode) can authorize up to 5 Spotify accounts — plenty for you (and, say, your family); you add each account under your app’s “User Management” tab. As for devices, you can use OffRadar on as many browsers and computers as you like: just redo the quick setup (paste your Client ID) on each. Your playlist history, however, stays specific to each browser (see below).' },
+          { q: 'Why don’t my playlists show up when I sign in on a different browser?',
+            a: 'Because OffRadar is an extension that runs entirely in your browser: your settings and the history of generated playlists are saved locally, on this device and this browser only. Nothing is stored online — there’s no OffRadar account — so that data doesn’t carry over from one browser or device to another. Your playlists themselves of course stay in your Spotify library (available everywhere); only the OffRadar history is local.' },
           { q: 'How can I save a playlist?',
             a: 'Every playlist you generate is added to your Spotify library. In OffRadar, only your last 10 playlists stay in History: beyond that, the oldest ones are automatically removed (from OffRadar and from your Spotify library). To keep one for good, mark it as a favorite (the star): favorites are never auto-deleted.' },
           { q: 'What happens when I delete a playlist?',
@@ -323,6 +334,7 @@
       $('l-fr').classList.toggle('actif', lang === 'fr');
       $('l-en').classList.toggle('actif', lang === 'en');
       txt('foot-privacy', t.footPrivacy);
+      txt('foot-support', t.footSupport);
       txt('foot-disc', t.footDisc);
 
       $('share').hidden = !estPartage;

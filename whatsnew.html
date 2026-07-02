@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OffRadar — Nouveautés</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16.png" />
+  <style>
+    :root {
+      --bg:#0c0c0e; --card:#161618; --border:#2a2a2e; --fg:#ededef; --muted:#9a9aa2;
+      --primary:#1ed760; --primary-hover:#1fdf64; --primary-fg:#00120a; --radius:14px;
+      --coffee:#ffdd00; --coffee-fg:#0d0c0b;
+    }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif;
+      background:radial-gradient(1000px 560px at 50% -12%, #15241b 0%, var(--bg) 58%); color:var(--fg);
+      line-height:1.55; min-height:100vh; }
+    .wrap { width:100%; max-width:640px; margin:0 auto; padding:34px 18px 56px; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
+    .entete { display:flex; align-items:center; gap:12px; }
+    .entete svg { width:38px; height:38px; color:var(--primary); }
+    .entete h1 { font-size:21px; font-weight:850; margin:0; letter-spacing:-0.02em; }
+    .lang { display:flex; gap:4px; }
+    .lang button { background:transparent; border:1px solid var(--border); color:var(--muted); border-radius:8px;
+      padding:4px 9px; font-size:12px; font-weight:700; cursor:pointer; }
+    .lang button.actif { background:#1d1d20; color:var(--fg); border-color:var(--fg); }
+
+    .eyebrow { display:inline-block; background:#10231a; border:1px solid #1c3b2a; color:#7ee2a8; border-radius:9999px;
+      padding:4px 12px; font-size:12px; font-weight:700; margin-bottom:14px; }
+    h2 { font-size:30px; line-height:1.1; font-weight:850; letter-spacing:-0.02em; margin:0 0 8px; }
+    .sub { color:var(--muted); margin:0 0 26px; font-size:15px; }
+
+    .card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:20px 22px; margin-bottom:16px; }
+    ul.feats { list-style:none; margin:0; padding:0; }
+    ul.feats li { display:flex; gap:12px; align-items:flex-start; padding:11px 0; border-bottom:1px solid var(--border); }
+    ul.feats li:last-child { border-bottom:none; }
+    ul.feats .ic { color:var(--primary); flex-shrink:0; margin-top:2px; }
+    ul.feats b { font-weight:700; }
+    ul.feats p { margin:2px 0 0; color:var(--muted); font-size:14px; }
+
+    .support { text-align:center; }
+    .support h3 { font-size:18px; margin:0 0 6px; }
+    .support p { color:var(--muted); font-size:14px; margin:0 0 16px; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:9px; border:none; border-radius:9999px;
+      padding:13px 24px; font-size:15px; font-weight:800; cursor:pointer; text-decoration:none; font-family:inherit; }
+    .btn-coffee { background:var(--coffee); color:var(--coffee-fg); }
+    .btn-coffee:hover { filter:brightness(1.05); }
+    .btn-ghost { background:transparent; color:var(--fg); border:1px solid var(--border); font-weight:700; }
+    .row { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+
+    footer { text-align:center; color:var(--muted); font-size:13px; margin-top:30px; }
+    footer a { color:var(--muted); }
+    .disclaimer { font-size:12px; opacity:.8; margin-top:6px; }
+    [hidden] { display:none !important; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="entete">
+        <svg viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM72,128a8,8,0,0,1-16,0,72.08,72.08,0,0,1,72-72,8,8,0,0,1,0,16A56.06,56.06,0,0,0,72,128Zm32,0a24,24,0,1,1,24,24A24,24,0,0,1,104,128Zm24,72a8,8,0,0,1,0-16,56.06,56.06,0,0,0,56-56,8,8,0,0,1,16,0A72.08,72.08,0,0,1,128,200Z"/></svg>
+        <h1>OffRadar</h1>
+      </div>
+      <div class="lang">
+        <button id="l-fr" data-l="fr">FR</button>
+        <button id="l-en" data-l="en">EN</button>
+      </div>
+    </div>
+
+    <span class="eyebrow" id="version"></span>
+    <h2 id="titre"></h2>
+    <p class="sub" id="sub"></p>
+
+    <div class="card">
+      <ul class="feats" id="feats"></ul>
+    </div>
+
+    <div class="card support">
+      <h3 id="sup-titre"></h3>
+      <p id="sup-texte"></p>
+      <div class="row">
+        <a class="btn btn-coffee" id="sup-btn" href="https://buymeacoffee.com/getoffradar" target="_blank" rel="noopener">☕ <span id="sup-label"></span></a>
+        <a class="btn btn-ghost" id="site-btn" href="https://getoffradar.com/" target="_blank" rel="noopener"></a>
+      </div>
+    </div>
+
+    <footer>
+      <div id="foot-note"></div>
+      <div class="disclaimer" id="foot-disc"></div>
+    </footer>
+  </div>
+
+  <script>
+    const CHECK = '<svg class="ic" viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.2 14.3l-3.5-3.5 1.4-1.4 2.1 2.1 4.6-4.6 1.4 1.4z"/></svg>';
+    const T = {
+      fr: {
+        version: 'Mise à jour',
+        titre: 'Quoi de neuf sur OffRadar',
+        sub: 'Merci d’utiliser OffRadar ! Voici les améliorations récentes.',
+        feats: [
+          ['Favoris', 'Mets une playlist en favori pour la garder à l’abri du nettoyage automatique de l’historique.'],
+          ['Pochette perso et renommage', 'Renomme tes playlists et pose ta propre pochette, directement depuis OffRadar.'],
+          ['Découverte affinée', 'Moteur de reco amélioré (via Last.fm) pour des pépites encore plus pertinentes.'],
+          ['Interface repensée', 'Cartes de playlists plus lisibles, historique clair (10 dernières), favoris à part.'],
+        ],
+        supTitre: 'OffRadar est gratuit et sans pub',
+        supTexte: 'Développé par une seule personne. Si l’outil te plaît, tu peux soutenir son développement en m’offrant un café. Merci 🙏',
+        supLabel: 'M’offrir un café',
+        site: 'Découvrir OffRadar',
+        footNote: 'Rouvre OffRadar depuis l’icône de la barre d’outils pour générer ta prochaine playlist.',
+        footDisc: 'Non affilié à Spotify. « Spotify » est une marque de Spotify AB.',
+      },
+      en: {
+        version: 'Update',
+        titre: 'What’s new in OffRadar',
+        sub: 'Thanks for using OffRadar! Here are the latest improvements.',
+        feats: [
+          ['Favorites', 'Star a playlist to keep it safe from the automatic history cleanup.'],
+          ['Custom covers and renaming', 'Rename your playlists and set your own cover, right from OffRadar.'],
+          ['Sharper discovery', 'Improved recommendation engine (via Last.fm) for even better hidden gems.'],
+          ['Refreshed interface', 'Cleaner playlist cards, clear history (last 10), favorites kept separately.'],
+        ],
+        supTitre: 'OffRadar is free and ad-free',
+        supTexte: 'Built by one person. If you enjoy it, you can support its development by buying me a coffee. Thank you 🙏',
+        supLabel: 'Buy me a coffee',
+        site: 'Discover OffRadar',
+        footNote: 'Reopen OffRadar from the toolbar icon to build your next playlist.',
+        footDisc: 'Not affiliated with Spotify. “Spotify” is a trademark of Spotify AB.',
+      },
+    };
+
+    const params = new URLSearchParams(location.search);
+    let lang = localStorage.getItem('lang_partage') || ((navigator.language || '').toLowerCase().startsWith('fr') ? 'fr' : 'en');
+    const $ = (id) => document.getElementById(id);
+
+    function rendre() {
+      const t = T[lang];
+      document.documentElement.lang = lang;
+      $('l-fr').classList.toggle('actif', lang === 'fr');
+      $('l-en').classList.toggle('actif', lang === 'en');
+      const to = params.get('to');
+      $('version').textContent = to ? `${t.version} · v${to}` : t.version;
+      $('titre').textContent = t.titre;
+      $('sub').textContent = t.sub;
+      $('feats').innerHTML = t.feats.map((f) => `<li>${CHECK}<div><b>${f[0]}</b><p>${f[1]}</p></div></li>`).join('');
+      $('sup-titre').textContent = t.supTitre;
+      $('sup-texte').textContent = t.supTexte;
+      $('sup-label').textContent = t.supLabel;
+      $('site-btn').textContent = t.site;
+      $('foot-note').textContent = t.footNote;
+      $('foot-disc').textContent = t.footDisc;
+    }
+    $('l-fr').addEventListener('click', () => { lang = 'fr'; localStorage.setItem('lang_partage', 'fr'); rendre(); });
+    $('l-en').addEventListener('click', () => { lang = 'en'; localStorage.setItem('lang_partage', 'en'); rendre(); });
+    rendre();
+  </script>
+</body>
+</html>
