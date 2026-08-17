@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OffRadar · Installation</title>
+  <meta name="description" content="Configurer OffRadar en 3 minutes : créer votre app Spotify et coller votre Client ID." />
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16.png" />
+  <style>
+    :root {
+      --bg:#0c0c0e; --card:#161618; --border:#2a2a2e; --fg:#ededef; --muted:#9a9aa2;
+      --primary:#1ed760; --primary-hover:#1fdf64; --primary-fg:#00120a; --radius:14px;
+      --warn-bg:#241d10; --warn-border:#4a3a18; --warn-fg:#f0cd7a;
+    }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif;
+      background:radial-gradient(1000px 560px at 50% -12%, #15241b 0%, var(--bg) 58%); color:var(--fg);
+      line-height:1.55; min-height:100vh; }
+    .wrap { width:100%; max-width:760px; margin:0 auto; padding:34px 18px 56px; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; }
+    .entete { display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit; }
+    .entete svg { width:38px; height:38px; color:var(--primary); }
+    .entete h1 { font-size:21px; font-weight:850; margin:0; letter-spacing:-0.02em; }
+    .lang { display:flex; gap:4px; }
+    .lang button { background:transparent; border:1px solid var(--border); color:var(--muted); border-radius:8px;
+      padding:4px 9px; font-size:12px; font-weight:700; cursor:pointer; }
+    .lang button.actif { background:#1d1d20; color:var(--fg); border-color:var(--fg); }
+
+    .eyebrow { display:inline-block; background:#10231a; border:1px solid #1c3b2a; color:#7ee2a8; border-radius:9999px;
+      padding:4px 12px; font-size:12px; font-weight:700; margin-bottom:14px; }
+    h2 { font-size:30px; line-height:1.1; font-weight:850; letter-spacing:-0.02em; margin:0 0 8px; }
+    .sub { color:var(--muted); margin:0 0 26px; font-size:15px; }
+
+    .card { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:20px 22px; margin-bottom:16px; }
+    .card h3 { font-size:17px; margin:0 0 8px; }
+    .card p { margin:0 0 10px; font-size:15px; }
+    .card p:last-child { margin-bottom:0; }
+
+    .prereq { background:var(--warn-bg); border:1px solid var(--warn-border); color:var(--warn-fg); }
+    .prereq h3 { color:var(--warn-fg); }
+    .prereq p { color:#e2c98d; }
+
+    ol.etapes { list-style:none; counter-reset:et; margin:0; padding:0; }
+    ol.etapes > li { counter-increment:et; position:relative; padding:0 0 22px 46px; }
+    ol.etapes > li::before { content:counter(et); position:absolute; left:0; top:0;
+      width:30px; height:30px; border-radius:50%; background:var(--primary); color:var(--primary-fg);
+      font-weight:850; font-size:15px; display:flex; align-items:center; justify-content:center; }
+    ol.etapes > li:not(:last-child)::after { content:''; position:absolute; left:14.5px; top:34px; bottom:4px;
+      width:1px; background:var(--border); }
+    ol.etapes b { display:block; font-weight:700; margin-bottom:3px; }
+    ol.etapes p { margin:0; color:var(--muted); font-size:14.5px; }
+
+    figure.shot { margin:12px 0 0; }
+    figure.shot img { width:100%; display:block; border-radius:10px; border:1px solid var(--border); }
+    figure.shot figcaption { color:var(--muted); font-size:12.5px; margin-top:6px; }
+
+    code.inline { background:#0a0a0c; border:1px solid var(--border); border-radius:6px; padding:2px 7px;
+      font-size:13px; word-break:break-all; }
+
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:9px; border:none; border-radius:9999px;
+      padding:12px 22px; font-size:15px; font-weight:800; cursor:pointer; text-decoration:none; font-family:inherit; }
+    .btn-primary { background:var(--primary); color:var(--primary-fg); }
+    .btn-primary:hover { background:var(--primary-hover); }
+    .btn-ghost { background:transparent; color:var(--fg); border:1px solid var(--border); font-weight:700; }
+    .row { display:flex; gap:10px; flex-wrap:wrap; }
+
+    details.tr { border-top:1px solid var(--border); padding:12px 0 2px; }
+    details.tr:first-of-type { border-top:none; }
+    details.tr summary { cursor:pointer; font-weight:700; font-size:15px; list-style:none; }
+    details.tr summary::-webkit-details-marker { display:none; }
+    details.tr summary::before { content:'▸ '; color:var(--primary); }
+    details.tr[open] summary::before { content:'▾ '; }
+    details.tr p { color:var(--muted); font-size:14.5px; margin:8px 0 10px; }
+
+    footer { text-align:center; color:var(--muted); font-size:13px; margin-top:30px; }
+    footer a { color:var(--muted); }
+    .disclaimer { font-size:12px; opacity:.8; margin-top:6px; }
+    [hidden] { display:none !important; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <a class="entete" href="./index.html">
+        <svg viewBox="0 0 256 256" fill="currentColor"><path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24ZM72,128a8,8,0,0,1-16,0,72.08,72.08,0,0,1,72-72,8,8,0,0,1,0,16A56.06,56.06,0,0,0,72,128Zm32,0a24,24,0,1,1,24,24A24,24,0,0,1,104,128Zm24,72a8,8,0,0,1,0-16,56.06,56.06,0,0,0,56-56,8,8,0,0,1,16,0A72.08,72.08,0,0,1,128,200Z"/></svg>
+        <h1>OffRadar</h1>
+      </a>
+      <div class="lang">
+        <button id="l-fr" data-l="fr">FR</button>
+        <button id="l-en" data-l="en">EN</button>
+      </div>
+    </div>
+
+    <span class="eyebrow" id="eyebrow"></span>
+    <h2 id="titre"></h2>
+    <p class="sub" id="sub"></p>
+
+    <div class="card prereq">
+      <h3 id="pre-titre"></h3>
+      <p id="pre-texte"></p>
+    </div>
+
+    <div class="card">
+      <h3 id="inst-titre"></h3>
+      <p id="inst-texte"></p>
+      <div class="row">
+        <a class="btn btn-primary" id="dl-chrome" href="https://chromewebstore.google.com/detail/chngpogljjjhoiffhldbfpbdfmmdjpbl" target="_blank" rel="noopener"></a>
+        <a class="btn btn-ghost" id="dl-ff" href="https://addons.mozilla.org/fr/firefox/addon/offradar/" target="_blank" rel="noopener"></a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 id="etapes-titre"></h3>
+      <ol class="etapes" id="etapes"></ol>
+    </div>
+
+    <div class="card">
+      <h3 id="tr-titre"></h3>
+      <div id="troubles"></div>
+    </div>
+
+    <div class="card" style="text-align:center">
+      <p id="fin-texte"></p>
+      <div class="row" style="justify-content:center; margin-top:12px">
+        <a class="btn btn-ghost" id="faq-btn" href="./index.html#faq"></a>
+      </div>
+    </div>
+
+    <footer>
+      <div id="foot-note"></div>
+      <div class="disclaimer" id="foot-disc"></div>
+    </footer>
+  </div>
+
+  <script>
+    // Les captures du dashboard Spotify sont en anglais pour tout le monde :
+    // un seul jeu d'images sert aux deux langues. Une image absente est simplement
+    // masquée (la page reste lisible sans elle).
+    const T = {
+      fr: {
+        eyebrow: 'Installation · ~3 min',
+        titre: 'Configurer OffRadar',
+        sub: 'OffRadar fonctionne avec votre propre compte développeur Spotify (gratuit). C’est ce qui permet à l’extension de tourner sans serveur : vos données ne passent par aucun intermédiaire.',
+        preTitre: 'À vérifier avant de commencer',
+        preTexte: 'Il vous faut un compte Spotify Premium. Depuis mars 2026, Spotify impose Premium pour ce type d’accès : avec un compte gratuit, la connexion échouera à la dernière étape. Important : toute la configuration doit être faite avec ce compte Premium, celui que vous utilisez pour écouter de la musique. C’est lui qui sera relié à OffRadar.',
+        instTitre: '1. Installez l’extension',
+        instTexte: 'Installez-la d’abord et gardez-la ouverte : vous aurez besoin d’y copier une adresse à l’étape 4.',
+        dlChrome: 'Installer sur Chrome',
+        dlFirefox: 'Installer sur Firefox',
+        etapesTitre: '2. Créez votre app Spotify',
+        etapes: [
+          ['Connectez-vous sur Spotify for Developers', 'Ouvrez developer.spotify.com et cliquez sur « Log in » en haut à droite. Connectez-vous avec le compte Spotify que vous utilisez pour écouter de la musique, celui qui a l’abonnement Premium. Un autre compte ne fonctionnera pas : c’est ce compte qui sera relié à OffRadar. Vous n’avez rien de plus à créer, votre compte Spotify sert aussi de compte développeur.', [
+            ['setup/00-1-create-spotify-developper-account.png', 'Le lien « Log in » en haut à droite du site Spotify for Developers.'],
+            ['setup/00-2-login-with-existing-spotify-credentials.png', 'Connectez-vous avec vos identifiants Spotify habituels, ceux de votre compte Premium.'],
+          ]],
+          ['Cliquez sur « Create app »', 'Depuis le Dashboard, le bouton se trouve en haut à droite.', [
+            ['setup/01-create-app.png', 'Le bouton « Create app » en haut à droite du Dashboard.'],
+          ]],
+          ['Nommez l’app', 'App name : « OffRadar » (ou ce que vous voulez) · App description : « perso ». Les deux champs sont obligatoires.', [
+            ['setup/02-app-name.png', 'Les champs « App name » et « App description ».'],
+          ]],
+          ['Collez la Redirect URI', 'Ouvrez OffRadar, cliquez sur « Copier » à côté de l’adresse affichée, collez-la dans « Redirect URIs » puis cliquez sur « Add ». Cette adresse est unique à votre navigateur : copiez-la depuis l’extension, ne la tapez pas à la main.', [
+            ['setup/03-redirect-uri.png', 'Le champ « Redirect URIs » et le bouton « Add ».'],
+          ]],
+          ['Cochez « Web API », acceptez les conditions, puis « Save »', 'Plus bas dans le même formulaire : cochez « Web API », puis cochez la case des « Developer Terms of Service », et cliquez sur « Save ». Sans ces deux cases, le formulaire ne sera pas validé. Le « Save » est l’étape la plus souvent oubliée.', [
+            ['setup/04-web-api.png', 'La case « Web API », celle des conditions, et le bouton « Save » en bas.'],
+          ]],
+          ['Ajoutez votre compte dans « User Management »', 'Ouvrez l’onglet « User Management » de l’app, saisissez le nom et l’email de votre compte Spotify, puis cliquez sur « Add user ». Le mode développeur n’autorise que les comptes ajoutés ici (5 au maximum).', [
+            ['setup/06-user-management.png', 'L’onglet « User Management » et le formulaire d’ajout.'],
+          ]],
+          ['Copiez le Client ID dans OffRadar', 'Dans l’onglet « Basic Information » de l’app, copiez le « Client ID », collez-le dans OffRadar puis cliquez sur « Enregistrer ». Il ne reste qu’à vous connecter.', [
+            ['setup/07-client-id.png', 'Le « Client ID » dans l’onglet « Basic Information ».'],
+          ]],
+        ],
+        trTitre: 'Si ça ne marche pas',
+        troubles: [
+          ['Spotify affiche une erreur « redirect_uri »', 'La Redirect URI n’est pas enregistrée. Rouvrez votre app Spotify, vérifiez que l’adresse copiée depuis OffRadar est bien dans « Redirect URIs », qu’elle a été ajoutée avec « Add », et surtout que vous avez cliqué sur « Save » en bas de la page.'],
+          ['Spotify refuse l’accès (erreur 403)', 'Deux causes possibles : le compte connecté n’est pas Premium, ou il n’a pas été ajouté dans l’onglet « User Management » de votre app. Vérifiez les deux, puis reconnectez-vous.'],
+          ['J’ai créé l’app avec un autre compte Spotify', 'La configuration doit être faite avec le compte Premium que vous utilisez pour écouter de la musique. Si l’app a été créée depuis un autre compte, ajoutez votre compte Premium dans « User Management », ou refaites l’app en étant connecté avec le bon compte.'],
+          ['Je ne retrouve pas la Redirect URI à copier', 'Elle s’affiche dans OffRadar, à l’étape de configuration, juste au-dessus du champ Client ID. Le bouton « Copier » la met dans votre presse-papiers. Elle est propre à votre navigateur : celle de Chrome ne fonctionne pas dans Firefox.'],
+          ['Mes playlists n’apparaissent pas dans Spotify', 'Sur mobile, elles peuvent mettre un instant à apparaître. Fermez et rouvrez l’application Spotify. La playlist est ajoutée à votre bibliothèque, pas à un dossier particulier.'],
+        ],
+        finTexte: 'Une question qui n’est pas traitée ici ?',
+        faq: 'Voir la FAQ',
+        footNote: 'OffRadar est gratuit, sans publicité et ne collecte aucune donnée.',
+        footDisc: 'Non affilié à Spotify. « Spotify » est une marque de Spotify AB.',
+      },
+      en: {
+        eyebrow: 'Setup · ~3 min',
+        titre: 'Set up OffRadar',
+        sub: 'OffRadar runs on your own free Spotify developer account. That is what lets the extension work with no server: your data goes through no middleman.',
+        preTitre: 'Check this before you start',
+        preTexte: 'You need a Spotify Premium account. Since March 2026, Spotify requires Premium for this kind of access: with a free account, sign-in will fail at the last step. Important: do the whole setup with that Premium account, the one you listen to music with. That is the account that gets linked to OffRadar.',
+        instTitre: '1. Install the extension',
+        instTexte: 'Install it first and keep it open: you will need to copy an address from it at step 4.',
+        dlChrome: 'Add to Chrome',
+        dlFirefox: 'Add to Firefox',
+        etapesTitre: '2. Create your Spotify app',
+        etapes: [
+          ['Sign in on Spotify for Developers', 'Go to developer.spotify.com and click “Log in” at the top right. Sign in with the Spotify account you actually listen to music with, the one with the Premium subscription. Another account will not work: this is the account that gets linked to OffRadar. There is nothing extra to create, your Spotify account doubles as your developer account.', [
+            ['setup/00-1-create-spotify-developper-account.png', 'The “Log in” link at the top right of the Spotify for Developers site.'],
+            ['setup/00-2-login-with-existing-spotify-credentials.png', 'Sign in with your usual Spotify credentials, the ones for your Premium account.'],
+          ]],
+          ['Click “Create app”', 'From the Dashboard, the button is at the top right.', [
+            ['setup/01-create-app.png', 'The “Create app” button at the top right of the Dashboard.'],
+          ]],
+          ['Name the app', 'App name: “OffRadar” (anything you like) · App description: “personal”. Both fields are required.', [
+            ['setup/02-app-name.png', 'The “App name” and “App description” fields.'],
+          ]],
+          ['Paste the Redirect URI', 'Open OffRadar, click “Copy” next to the address it shows, paste it into “Redirect URIs” then click “Add”. This address is unique to your browser: copy it from the extension, do not type it by hand.', [
+            ['setup/03-redirect-uri.png', 'The “Redirect URIs” field and the “Add” button.'],
+          ]],
+          ['Tick “Web API”, accept the terms, then “Save”', 'Further down the same form: tick “Web API”, then tick the “Developer Terms of Service” box, and click “Save”. Without both boxes the form will not go through. The “Save” is the most commonly missed step.', [
+            ['setup/04-web-api.png', 'The “Web API” box, the terms box, and the “Save” button at the bottom.'],
+          ]],
+          ['Add your account under “User Management”', 'Open the app’s “User Management” tab, enter your Spotify account name and email, then click “Add user”. Development mode only allows accounts listed there (5 maximum).', [
+            ['setup/06-user-management.png', 'The “User Management” tab and the add form.'],
+          ]],
+          ['Copy the Client ID into OffRadar', 'In the app’s “Basic Information” tab, copy the “Client ID”, paste it into OffRadar and click “Save”. All that is left is to sign in.', [
+            ['setup/07-client-id.png', 'The “Client ID” in the “Basic Information” tab.'],
+          ]],
+        ],
+        trTitre: 'If something goes wrong',
+        troubles: [
+          ['Spotify shows a “redirect_uri” error', 'The Redirect URI is not saved. Reopen your Spotify app, check that the address copied from OffRadar is in “Redirect URIs”, that you added it with “Add”, and above all that you clicked “Save” at the bottom of the page.'],
+          ['Spotify denies access (403 error)', 'Two possible causes: the connected account is not Premium, or it was not added under your app’s “User Management” tab. Check both, then sign in again.'],
+          ['I created the app with a different Spotify account', 'Setup has to be done with the Premium account you listen to music with. If the app was created from another account, add your Premium account under “User Management”, or create the app again while signed in with the right account.'],
+          ['I cannot find the Redirect URI to copy', 'It is shown inside OffRadar, on the setup screen, just above the Client ID field. The “Copy” button puts it on your clipboard. It is specific to your browser: the Chrome one will not work in Firefox.'],
+          ['My playlists do not show up in Spotify', 'On mobile they can take a moment to appear. Close and reopen the Spotify app. The playlist is added to your library, not to a particular folder.'],
+        ],
+        finTexte: 'A question that is not covered here?',
+        faq: 'See the FAQ',
+        footNote: 'OffRadar is free, ad-free and collects no data.',
+        footDisc: 'Not affiliated with Spotify. “Spotify” is a trademark of Spotify AB.',
+      },
+    };
+
+    let lang = localStorage.getItem('lang_partage') || ((navigator.language || '').toLowerCase().startsWith('fr') ? 'fr' : 'en');
+    const $ = (id) => document.getElementById(id);
+    const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+
+    function rendre() {
+      const t = T[lang];
+      document.documentElement.lang = lang;
+      $('l-fr').classList.toggle('actif', lang === 'fr');
+      $('l-en').classList.toggle('actif', lang === 'en');
+      $('eyebrow').textContent = t.eyebrow;
+      $('titre').textContent = t.titre;
+      $('sub').textContent = t.sub;
+      $('pre-titre').textContent = t.preTitre;
+      $('pre-texte').textContent = t.preTexte;
+      $('inst-titre').textContent = t.instTitre;
+      $('inst-texte').textContent = t.instTexte;
+      $('dl-chrome').textContent = t.dlChrome;
+      $('dl-ff').textContent = t.dlFirefox;
+      $('etapes-titre').textContent = t.etapesTitre;
+      $('etapes').innerHTML = t.etapes.map(([titre, desc, images]) => `
+        <li><b>${esc(titre)}</b><p>${esc(desc)}</p>
+          ${(images || []).map(([img, cap]) => `<figure class="shot" hidden><img src="${esc(img)}" alt="${esc(cap)}" loading="lazy" /><figcaption>${esc(cap)}</figcaption></figure>`).join('')}
+        </li>`).join('');
+      $('tr-titre').textContent = t.trTitre;
+      $('troubles').innerHTML = t.troubles.map(([q, a]) =>
+        `<details class="tr"><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('');
+      $('fin-texte').textContent = t.finTexte;
+      $('faq-btn').textContent = t.faq;
+      $('foot-note').textContent = t.footNote;
+      $('foot-disc').textContent = t.footDisc;
+      revelerImages();
+    }
+
+    // Une capture n'est affichée que si le fichier existe vraiment : la page reste
+    // propre tant que les images ne sont pas déposées dans setup/.
+    function revelerImages() {
+      for (const fig of document.querySelectorAll('figure.shot')) {
+        const img = fig.querySelector('img');
+        const test = new Image();
+        test.onload = () => { fig.hidden = false; };
+        test.onerror = () => { fig.hidden = true; };
+        test.src = img.getAttribute('src');
+      }
+    }
+
+    $('l-fr').addEventListener('click', () => { lang = 'fr'; localStorage.setItem('lang_partage', 'fr'); rendre(); });
+    $('l-en').addEventListener('click', () => { lang = 'en'; localStorage.setItem('lang_partage', 'en'); rendre(); });
+    rendre();
+  </script>
+</body>
+</html>

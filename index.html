@@ -52,6 +52,9 @@
       color:#e7d9a8; border-radius:12px; padding:11px 15px; font-size:13.5px; max-width:46ch; line-height:1.45; }
     .req i { color:#f0c453; font-size:18px; margin-top:1px; flex-shrink:0; }
     .req b { color:#fbe9b8; }
+    .req-lien { color:#fbe9b8; font-weight:700; text-decoration:underline; text-underline-offset:2px;
+      text-decoration-thickness:1px; }
+    .req-lien:hover { color:#fff6e0; }
     .cta-note { color:var(--muted); font-size:13px; }
     .cta-note b { color:var(--fg); }
 
@@ -216,7 +219,7 @@
         eyebrow: 'Chrome & Firefox · Gratuite',
         heroTitre: 'De vraies découvertes musicales, pas du réchauffé',
         heroSub: 'OffRadar part de ton historique d’écoute Spotify pour dénicher tes prochains artistes préférés, et génère une playlist unique à chaque fois.',
-        req: 'À savoir avant d’installer : OffRadar nécessite un <b>compte Spotify Premium</b> et un <b>compte Spotify Developer</b> (gratuit, créé en 2 min, on te guide).',
+        req: 'À savoir avant d’installer : OffRadar nécessite un <b>compte Spotify Premium</b> et un <b>compte Spotify Developer</b> (gratuit, créé en 2 min, <a class="req-lien" href="./setup.html">on te guide pas à pas</a>).',
         ctaNote: '<b>Gratuit</b> · Aucune donnée collectée · Chrome et Firefox',
         tSteps: 'Comment ça marche',
         st1t: 'Connecte ton Spotify', st1p: 'Connexion sécurisée en quelques clics. Rien n’est stocké chez nous. L’extension requiert un compte Spotify Developer (gratuit).',
@@ -231,12 +234,14 @@
         f4t: 'Partage en 2 clics', f4p: 'Fais découvrir tes pépites, aucune installation requise.',
         tFaq: 'Questions fréquentes',
         faq: [
+          { q: 'Comment configurer l’extension ?',
+            a: 'La configuration se fait une seule fois et prend environ 3 minutes : tu crées ta propre app Spotify (gratuite) et tu colles son « Client ID » dans OffRadar. Le <a href="./setup.html">guide d’installation illustré</a> reprend les 7 étapes en images, avec les erreurs fréquentes et comment les corriger.' },
           { q: 'Pourquoi proposer une extension plutôt qu’un site ?',
             a: 'Parce que tout se passe directement entre ton navigateur et Spotify, sans serveur intermédiaire. Tes identifiants et ton historique d’écoute ne transitent jamais par nos serveurs, il n’y en a pas. Une extension permet cette approche 100 % locale et privée, qu’un site hébergé ne pourrait pas garantir aussi simplement.' },
           { q: 'Pourquoi ai-je besoin d’un compte Spotify Developer ?',
             a: 'Spotify limite le nombre d’utilisateurs par application en mode développeur. Pour que tout le monde puisse utiliser OffRadar sans liste d’attente, chaque utilisateur crée sa propre petite application Spotify (gratuite et en 2 minutes) et y connecte OffRadar. C’est ce qui garde l’outil ouvert et indépendant.' },
           { q: 'Comment créer mon compte Spotify Developer ?',
-            a: 'Va sur le <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener">Spotify Developer Dashboard</a>, connecte-toi, clique « Create app », coche « Web API », ajoute l’URL de redirection affichée par l’extension, puis copie ton « Client ID » dans OffRadar. L’extension te guide pas à pas au premier lancement.' },
+            a: 'Tu n’as pas de compte séparé à créer : ton compte Spotify sert aussi de compte développeur. Connecte-toi sur le <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener">Spotify Developer Dashboard</a> avec ton compte Premium (le même que celui où tu écoutes ta musique), crée une app, puis colle son « Client ID » dans OffRadar. Le <a href="./setup.html">guide d’installation illustré</a> détaille chaque étape en images ; l’extension te guide aussi au premier lancement.' },
           { q: 'Combien de comptes / d’appareils un compte développeur peut-il gérer ?',
             a: 'Ton application Spotify Developer (en mode développement) peut autoriser jusqu’à 5 comptes Spotify — largement assez pour toi (et par exemple ta famille) ; chaque compte s’ajoute dans l’onglet « User Management » de ton app. Côté appareils, tu peux utiliser OffRadar sur autant de navigateurs et d’ordinateurs que tu veux : il suffit de refaire la petite configuration (coller ton Client ID) sur chacun. En revanche, ton historique de playlists reste propre à chaque navigateur (voir ci-dessous).' },
           { q: 'Pourquoi mes playlists n’apparaissent-elles pas quand je me connecte sur un autre navigateur ?',
@@ -272,7 +277,7 @@
         eyebrow: 'Chrome & Firefox · Free',
         heroTitre: 'Real musical discoveries, not reheated leftovers',
         heroSub: 'OffRadar starts from your Spotify listening history to dig out your next favorite artists, and builds a unique playlist every time.',
-        req: 'Before you install: OffRadar requires a <b>Spotify Premium account</b> and a <b>Spotify Developer account</b> (free, set up in 2 min, we guide you).',
+        req: 'Before you install: OffRadar requires a <b>Spotify Premium account</b> and a <b>Spotify Developer account</b> (free, set up in 2 min, <a class="req-lien" href="./setup.html">step-by-step guide</a>).',
         ctaNote: '<b>Free</b> · No data collected · Chrome & Firefox',
         tSteps: 'How it works',
         st1t: 'Connect your Spotify', st1p: 'Secure sign-in in a few clicks. Nothing is stored on our side. The extension requires a free Spotify Developer account.',
@@ -287,12 +292,14 @@
         f4t: 'Share in 2 clicks', f4p: 'Share your gems, no install needed.',
         tFaq: 'Frequently asked questions',
         faq: [
+          { q: 'How do I set up the extension?',
+            a: 'Setup happens once and takes about 3 minutes: you create your own free Spotify app and paste its “Client ID” into OffRadar. The <a href="./setup.html">illustrated setup guide</a> covers all 7 steps in pictures, including the common mistakes and how to fix them.' },
           { q: 'Why an extension rather than a website?',
             a: 'Because everything happens directly between your browser and Spotify, with no server in between. Your credentials and listening history never pass through our servers, there are none. An extension makes this fully local, private approach possible in a way a hosted website couldn’t guarantee as simply.' },
           { q: 'Why do I need a Spotify Developer account?',
             a: 'Spotify caps the number of users per app in developer mode. So that everyone can use OffRadar without a waitlist, each user creates their own small Spotify app (free, in 2 minutes) and connects OffRadar to it. That’s what keeps the tool open and independent.' },
           { q: 'How do I create my Spotify Developer account?',
-            a: 'Go to the <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener">Spotify Developer Dashboard</a>, sign in, click “Create app”, tick “Web API”, add the redirect URL shown by the extension, then copy your “Client ID” into OffRadar. The extension walks you through it on first launch.' },
+            a: 'There is no separate account to create: your Spotify account doubles as your developer account. Sign in to the <a href="https://developer.spotify.com/dashboard" target="_blank" rel="noopener">Spotify Developer Dashboard</a> with your Premium account (the same one you listen to music with), create an app, then paste its “Client ID” into OffRadar. The <a href="./setup.html">illustrated setup guide</a> covers every step in pictures; the extension also walks you through it on first launch.' },
           { q: 'How many accounts / devices can a single developer account support?',
             a: 'Your Spotify Developer app (in development mode) can authorize up to 5 Spotify accounts — plenty for you (and, say, your family); you add each account under your app’s “User Management” tab. As for devices, you can use OffRadar on as many browsers and computers as you like: just redo the quick setup (paste your Client ID) on each. Your playlist history, however, stays specific to each browser (see below).' },
           { q: 'Why don’t my playlists show up when I sign in on a different browser?',
